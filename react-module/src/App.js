@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import RegistrationPageComponent from './components/RegistrationPageComponent';
 import UserDetailsComponent from './components/UserDetailsComponent';
+import LoginPageComponent from './components/LoginPageComponent';
 
 function App () {
   return (
@@ -16,7 +17,8 @@ function App () {
           <Routes>
             <Route path='/' element={<HomePageComponent />} />
             <Route path='register' element={<RegistrationPageComponent />} />
-            <Route path='user/:id' element={<UserDetailsComponent />} />
+            <Route path='login' element={<LoginPageComponent />} />
+            <Route path='user/:username' element={<UserDetailsComponent />} />
           </Routes>
         </Router>
       </div>

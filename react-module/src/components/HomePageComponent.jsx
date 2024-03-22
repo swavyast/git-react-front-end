@@ -18,9 +18,9 @@ class HomePageComponent extends React.Component {
         this.handleLogout = this.handleLogout.bind( this );
     }
 
-    handleLogin ( id ) {
+    handleLogin ( username ) {
         this.props.setIsAuthenticated( true );
-        this.props.navigate( 'user/' + id );
+        this.props.navigate( 'user/' + username );
     }
     handleLogout () {
         this.props.setIsAuthenticated( false );
