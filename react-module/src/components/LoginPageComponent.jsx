@@ -30,7 +30,7 @@ class LoginPageComponent extends React.Component {
     render () {
         return (
             <div>
-                <div className='container p-5'>
+                <div className='container p-2'>
                     <h3 className='text-center'><a onClick={() => this.props.navigate( '/' )} className='nav-link pe-auto'><FontAwesomeIcon icon={faHome} /></a></h3>
                     <div className='card shadow-lg p-5'>
                         <form onSubmit={this.submitHandler}>
