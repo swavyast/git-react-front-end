@@ -9,7 +9,6 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons';
 function NavigatorHook () {
     const navigate = useNavigate();
     const [ isAuthenticated, setIsAuthenticated ] = useState( false );
-    console.log( this.props.navigate );
 
     return <RegistrationPageComponent navigate={navigate} isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />;
 }
@@ -43,12 +42,11 @@ class RegistrationPageComponent extends React.Component {
         return (
             <div>
                 <div className='container p-5'>
-                    <h3 className='text-center mt-5'><a href='/' className='nav-link pe-auto'><FontAwesomeIcon icon={faHome} /></a></h3>
                     <div className='card shadow-lg p-5'>
                         <main className="form-signin">
                             <form onSubmit={this.submitHandler}>
                                 <h1 className="h2 mb-3 fw-normal text-center"><FontAwesomeIcon icon={faGithub} />&nbsp;</h1>
-                                <h1 className="h3 mb-3 fw-normal text-center"><span className='d-inline-flex'>Already registered?&nbsp;<a onClick={() => this.props.navigate( '/login' )} className='nav-link pe-auto text-success'>Login</a>&nbsp; here.</span></h1>
+                                <h1 className="h5 mb-4 fw-normal text-center"><span className='d-inline-flex'>Already registered?&nbsp;<a href='/login' className='nav-link pe-auto text-success'>Login</a>&nbsp; here.</span></h1>
                                 <div className='card shadow-dark-md m-3 p-3'>
                                     <div className='container p-4'>
                                         <div className='row'>
@@ -95,4 +93,4 @@ class RegistrationPageComponent extends React.Component {
 
 RegistrationPageComponent.propTypes = {};
 
-export default RegistrationPageComponent;
+export default NavigatorHook;

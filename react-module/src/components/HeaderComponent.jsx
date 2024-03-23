@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { faHome } from '@fortawesome/free-solid-svg-icons';
 
 function NavigatorHook () {
     const navigate = useNavigate();
@@ -47,6 +48,7 @@ class HeaderComponent extends React.Component {
                         </div>
                     </div>
                 </nav>
+                <h3 className='text-center mb-0' style={{marginTop:'60px'}}><a href='/' className='nav-link pe-auto'><FontAwesomeIcon icon={faHome} /></a></h3>
             </div>
         );
     }

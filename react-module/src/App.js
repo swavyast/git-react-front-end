@@ -9,7 +9,7 @@ import FooterComponent from './components/FooterComponent';
 
 function App () {
   return (
-    <div className="container">
+    <div className="container-fluid p-0">
       <Router>
         <HeaderComponent />
         <Routes>

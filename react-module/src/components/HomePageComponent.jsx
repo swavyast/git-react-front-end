@@ -21,6 +21,12 @@ class HomePageComponent extends React.Component {
         };
         this.handleLogin = this.handleLogin.bind( this );
         this.handleLogout = this.handleLogout.bind( this );
+        this.handleChange = this.handleChange.bind( this );
+    }
+
+    handleChange ( event ) {
+        const { name, value } = event.target;
+        this.setState( { [ name ]: value } );
     }
 
     handleLogout () {
@@ -44,30 +50,30 @@ class HomePageComponent extends React.Component {
                 )} */}
                 <div className="container-fluid p-0">
                     <div className="col-md-6 offset-3">
-                        <div className="text-center" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh', width: '35em' }}>
-                            <div className="card shadow-lg col-md-8 offset-2 px-5 pt-3" style={{ marginLeft: '-1.5em' }}>
+                        <div className="text-center" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '75vh', width: '35em', marginLeft:'18px' }}>
+                            <div className="card shadow-lg col-md-8 offset-2 px-5 pt-3">
                                 <main className="form-signin">
                                     <form>
                                             <h1 className="h3 mb-3 fw-normal"><FontAwesomeIcon icon={faGithub} />&nbsp;</h1>
                                             <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
 
                                         <div className="form-floating">
-                                            <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com" />
+                                            <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com" onChange={this.handleChange} />
                                             <label for="floatingInput">Email address</label>
                                         </div>
                                         <div className="form-floating mt-2">
-                                            <input type="password" className="form-control" id="floatingPassword" placeholder="Password" />
+                                            <input type="password" className="form-control" id="floatingPassword" placeholder="Password" onChange={this.handleChange} />
                                             <label for="floatingPassword">Password</label>
                                         </div>
 
                                         <div className="checkbox mb-3 mt-2">
                                             <label>
-                                                <input type="checkbox" value="remember-me" /> Remember me
+                                                <input type="checkbox" value="remember-me" onChange={this.handleChange} /> Remember me
                                             </label>
                                         </div>
                                         <button className="w-100 btn btn-lg btn-dark" type="submit">Sign in</button>
                                         <div className="text-center text-muted mt-3">
-                                            New User? <a href="/register" className="nav-link text-dark">Register</a>
+                                            New user? <a href="/register" className="nav-link text-dark">Register</a>
                                         </div>
                                         <p className="text-center text-muted my-3">&copy;marketListing</p>
                                     </form>
