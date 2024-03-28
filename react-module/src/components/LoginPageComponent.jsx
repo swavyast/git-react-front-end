@@ -24,7 +24,7 @@ class LoginPageComponent extends React.Component {
     handleLogin () {
         const { username, password } = this.state;
         const user = { username, password };
-        UserService.login( user );
+        UserService.loginUser( user );
     }
 
     render () {
@@ -40,7 +40,7 @@ class LoginPageComponent extends React.Component {
                                         <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
 
                                         <div className="form-floating">
-                                            <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com" onChange={this.handleChange} />
+                                            <input type="text" className="form-control" id="floatingInput" placeholder="name@example.com" onChange={this.handleChange} />
                                             <label for="floatingInput">Email address</label>
                                         </div>
                                         <div className="form-floating mt-2">
@@ -53,7 +53,7 @@ class LoginPageComponent extends React.Component {
                                                 <input type="checkbox" value="remember-me" onChange={this.handleChange} /> Remember me
                                             </label>
                                         </div>
-                                        <button className="w-100 btn btn-lg btn-dark" type="submit">Sign in</button>
+                                        <button className="w-100 btn btn-lg btn-dark" type="submit" onSubmit={this.handleLogin}>Sign in</button>
                                         <div className="text-center text-muted mt-3">
                                             New user? <a href="/register" className="nav-link text-dark">Register</a>
                                         </div>

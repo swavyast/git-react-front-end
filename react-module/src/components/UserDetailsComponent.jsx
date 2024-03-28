@@ -1,19 +1,43 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
-import { useNavigate } from 'react-router-dom';
-import UserService from '../services/UserService';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import UserService from '../services/UserService';
 
 class UserDetailsComponent extends React.Component {
     constructor ( props ) {
         super( props );
-        this.state = {};
+        this.state = {
+            name: props.name,
+            username: props.username,
+            email: props.email,
+            password: props.password
+        };
+        this.fetchUserData = this.fetchUserData.bind(this);
+    }
+    fetchUserData(string){
+        const user = UserService.getUserByUsername(string);
+
+        return user;
+    }
+
+    componentDidMount(){
+        this.fetchUserData(this.props.username)
+        .then(userData => {
+            this.setState({
+                name: userData.name,
+                username: userData.username,
+                email: userData.email,
+                password: userData.password
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching user data:', error);
+        });
     }
 
     render () {
-        const { username } = this.props;
+        const username = this.props.username;
         return (
             <div>
                 <div className='container p-5'>
@@ -21,7 +45,7 @@ class UserDetailsComponent extends React.Component {
                         <main className="form-signin">
                             <form onSubmit={this.submitHandler}>
                                 <h1 className="h2 mb-3 fw-normal text-center"><FontAwesomeIcon icon={faGithub} />&nbsp;</h1>
-                                <h1 className="h5 mb-4 fw-normal text-center">{(username!=null)? username+'\'s Details' : 'Unknown user\''+'s Details'}</h1>
+                                <h1 className="h5 mb-4 fw-normal text-center">{(username!=null) ? username+'\'s Details' : 'Unknown user\''+'s Details'}</h1>
                                 <div className='card shadow-dark-md m-3 p-3'>
                                     <div className='container p-4'>
                                         <div className='row'>

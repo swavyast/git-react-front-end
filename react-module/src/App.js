@@ -16,7 +16,7 @@ function App () {
           <Route path='/' element={<HomePageComponent />} />
           <Route path='register' element={<RegistrationPageComponent />} />
           <Route path='login' element={<LoginPageComponent />} />
-          <Route path='user/:username' element={<UserDetailsComponent />} />
+          <Route path='users/:username' element={<UserDetailsComponent />} />
         </Routes>
         <FooterComponent />
       </Router>

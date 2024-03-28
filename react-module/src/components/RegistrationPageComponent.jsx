@@ -35,7 +35,8 @@ class RegistrationPageComponent extends React.Component {
         const user = { name, username, email, password };
         console.log( JSON.stringify( user ) );
         UserService.registerUser( user ).then( ( res ) => {
-            this.props.navigate( '/user/' + username );
+            this.props.navigate( '/users/' + username );
+            return user;
         } );
     }
     render () {
