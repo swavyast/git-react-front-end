@@ -5,6 +5,8 @@ import UserDetailsComponent from './components/UserDetailsComponent';
 import LoginPageComponent from './components/LoginPageComponent';
 import HeaderComponent from './components/HeaderComponent';
 import FooterComponent from './components/FooterComponent';
+import AdminPanelComponent from './components/AdminPanelComponent';
+import RepositoryComponent from './components/RepositoryComponent';
 
 
 function App () {
@@ -14,9 +16,11 @@ function App () {
         <HeaderComponent />
         <Routes>
           <Route path='/' element={<HomePageComponent />} />
-          <Route path='register' element={<RegistrationPageComponent />} />
-          <Route path='login' element={<LoginPageComponent />} />
-          <Route path='users/:username' element={<UserDetailsComponent />} />
+          <Route path='/register' element={<RegistrationPageComponent />} />
+          <Route path='/login' element={<LoginPageComponent />} />
+          <Route path='/users/:username' element={<UserDetailsComponent />} />
+          <Route path='/admin' element={<AdminPanelComponent />} />
+          <Route path='/repos' element={<RepositoryComponent />} />
         </Routes>
         <FooterComponent />
       </Router>

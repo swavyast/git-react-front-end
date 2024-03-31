@@ -11,29 +11,31 @@ class UserDetailsComponent extends React.Component {
             name: props.name,
             username: props.username,
             email: props.email,
-            password: props.password
+            password: props.password,
+            repos:[]
         };
-        this.fetchUserData = this.fetchUserData.bind(this);
+        this.fetchUserData = this.fetchUserData.bind( this );
+        // this.createCard = this.createCard.bind( this );
     }
-    fetchUserData(string){
-        const user = UserService.getUserByUsername(string);
+    fetchUserData ( username ) {
+        const user = UserService.getUserByUsername( username );
 
         return user;
     }
 
-    componentDidMount(){
-        this.fetchUserData(this.props.username)
-        .then(userData => {
-            this.setState({
-                name: userData.name,
-                username: userData.username,
-                email: userData.email,
-                password: userData.password
-            });
-        })
-        .catch(error => {
-            console.error('Error fetching user data:', error);
-        });
+    componentDidMount () {
+        this.fetchUserData( this.props.username )
+            .then( userData => {
+                this.setState( {
+                    name: userData.name,
+                    username: userData.username,
+                    email: userData.email,
+                    password: userData.password
+                } );
+            } )
+            .catch( error => {
+                console.error( 'Error fetching user data:', error );
+            } );
     }
 
     render () {
@@ -45,7 +47,7 @@ class UserDetailsComponent extends React.Component {
                         <main className="form-signin">
                             <form onSubmit={this.submitHandler}>
                                 <h1 className="h2 mb-3 fw-normal text-center"><FontAwesomeIcon icon={faGithub} />&nbsp;</h1>
-                                <h1 className="h5 mb-4 fw-normal text-center">{(username!=null) ? username+'\'s Details' : 'Unknown user\''+'s Details'}</h1>
+                                <h1 className="h5 mb-4 fw-normal text-center">{( username != null ) ? username + '\'s Details' : 'Unknown user\'' + 's Details'}</h1>
                                 <div className='card shadow-dark-md m-3 p-3'>
                                     <div className='container p-4'>
                                         <div className='row'>
@@ -127,6 +129,9 @@ class UserDetailsComponent extends React.Component {
                             </form>
                         </main>
                     </div>
+                </div>
+                <div className="container">
+                    {/* {cardArray} */}
                 </div>
             </div>
         );

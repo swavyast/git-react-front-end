@@ -71,7 +71,7 @@ class HomePageComponent extends React.Component {
                                                 <input type="checkbox" value="remember-me" onChange={this.handleChange} /> Remember me
                                             </label>
                                         </div>
-                                        <button className="w-100 btn btn-lg btn-dark" type="submit" onSubmit={UserService.loginUser(user)}>Sign in</button>
+                                        <button className="w-100 btn btn-lg btn-dark" type="submit" onSubmit=''>Sign in</button>
                                         <div className="text-center text-muted mt-3">
                                             New user? <a href="/register" className="nav-link text-dark">Register</a>
                                         </div>
