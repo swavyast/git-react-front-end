@@ -6,15 +6,16 @@ import GitHubService from '../services/GitHubService';
 
 function NavigatorHook(){
     const navigate = useNavigate();
-    const name = useParams();
+    const {username, name} = useParams();
 
-    return <RepositoryComponent navigate = {navigate} name = {name} />
+    return <RepositoryDetailsComponent navigate = {navigate} username = {username} name = {name} />
 }
 
 class RepositoryDetailsComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            repo :{
             id : '',
             name : '',
             url : '',
@@ -25,17 +26,23 @@ class RepositoryDetailsComponent extends React.Component {
             updatedAt : '',
             pushedAt : '',
             homepage : '',
-            visibility : '',
-            repo : ''
+            visibility : '' 
+        } 
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.createCard = this.createCard.bind(this);
+        this.editRepo = this.editRepo.bind(this);
     }
 
     handleChange(event){
         const {name, value} = event.target;
         this.setState({[name] : value});
+    }
+
+    editRepo(){
+        const {repo} = this.state;
+        this.setState({repo:{...repo, name : 'angular1'}})
     }
 
     createCard ( id, name, url, desc, gitUrl, sshUrl,
@@ -47,22 +54,22 @@ class RepositoryDetailsComponent extends React.Component {
                     <div className="card overflow-auto">
                         <div className="d-inline-flex text-truncate">
                             <div className="p-2 m-1">
-                                <p className="text-dark" onChange={this.handleChange}>ID : {id}</p>
-                                <p className="text-dark" onChange={this.handleChange}>Name : {name}</p>
-                                <p className="text-dark" onChange={this.handleChange}>Created At : {createdAt}</p>
-                                <p className="text-dark" onChange={this.handleChange}>Updated At : {updatedAt}</p>
-                                <p className="text-dark" onChange={this.handleChange}>Pushed At : {pushedAt}</p>
+                                <p className="text-dark">ID : {id}</p>
+                                <p className="text-dark">Name : {name}</p>
+                                <p className="text-dark">Created At : {createdAt}</p>
+                                <p className="text-dark">Updated At : {updatedAt}</p>
+                                <p className="text-dark">Pushed At : {pushedAt}</p>
                             </div>
                             <div className="p-2 m-1">
-                                <p className="text-dark" onChange={this.handleChange}><a href='{url}'>HTML URL</a></p>
-                                <p className="text-dark" onChange={this.handleChange}><a href="{gitUrl}">Git URL</a></p>
-                                <p className="text-dark" onChange={this.handleChange}><a href='{sshUrl}'>SSH URL</a></p>
-                                <p className="text-dark" onChange={this.handleChange}><a href='{homepage}'>HOMEPAGE</a></p>
+                                <p className="text-dark"><a href={url}>HTML URL</a></p>
+                                <p className="text-dark"><a href={gitUrl}>Git URL</a></p>
+                                <p className="text-dark"><a href={sshUrl}>SSH URL</a></p>
+                                <p className="text-dark"><a href={homepage}>HOMEPAGE</a></p>
                             </div>
                             <div className="p-2 m-1">
-                                <small className="text-dark" onChange={this.handleChange}>Description : <span className='text-muted'>{desc}</span></small>
-                                <p className="text-dark" onChange={this.handleChange}>Visibility : {visibility}</p>
-                                <p className='text-center' onChange={this.handleChange}> <button type='button' onClick={this.selectRepo}>Edit</button> </p>
+                                <small className="text-dark">Description : <span className='text-muted'>{desc}</span></small>
+                                <p className="text-dark">Visibility : {visibility}</p>
+                                <p className='text-center' onChange={this.handleChange}> <button type='button' onClick={this.editRepo}>Edit</button> </p>
                             </div>
                         </div>
                     </div>
@@ -72,18 +79,15 @@ class RepositoryDetailsComponent extends React.Component {
     }
 
     componentDidMount(){
-        const repos = GitHubService.getRepositoryByName(this.props.name)
+        const {username, name} = this.props;
+        GitHubService.getRepositoryByName(username, name)
         .then(data => this.setState({ repo: data }))
         .catch(error => console.error('Error fetching repository:', error));
-
-        this.setState(
-            this.id = repos.id,
-            this.name = repos.name,
-        )
     }
 
     render() {
         const { repo } = this.state;
+        console.log("repo in RepositoryDetailsComponent render method : "+repo.id);
         return (
             <div>
               {
@@ -108,4 +112,4 @@ class RepositoryDetailsComponent extends React.Component {
 
 RepositoryDetailsComponent.propTypes = {};
 
-export default RepositoryDetailsComponent;
+export default NavigatorHook;

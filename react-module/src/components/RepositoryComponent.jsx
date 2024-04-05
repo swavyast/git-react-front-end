@@ -19,13 +19,15 @@ class RepositoryComponent extends React.Component {
         this.selectRepo = this.selectRepo.bind(this);
     }
 
-    selectRepo(name){
-        console.log('Selected repository name:', name);
-        this.props.navigate(`/repo/${name}`);
+    selectRepo(username, name){
+        console.log('Selected repository name:', username, name);
+        const {navigate} = this.props;
+        navigate(`/repos/${username}/${name}`);
     }
 
     createCard ( id, name, url, desc, gitUrl, sshUrl,
         createdAt, updatedAt, pushedAt, homepage, visibility ) {
+            const uname = url.split('/')[3];
         return (
             <div className='container' key={id}>
                 <div className="row w-75 p-2 m-2 text-center">
@@ -48,7 +50,7 @@ class RepositoryComponent extends React.Component {
                             <div className="p-2 m-1">
                                 <small className="text-dark">Description : <span className='text-muted'>{desc}</span></small>
                                 <p className="text-dark">Visibility : {visibility}</p>
-                                <p className='text-center'> <button type='button' onClick={()=>this.selectRepo(repo.name)}>Select</button> </p>
+                                <p className='text-center'> <button type='button' onClick={()=>this.selectRepo(uname, name)}>Select</button> </p>
                             </div>
                         </div>
                     </div>

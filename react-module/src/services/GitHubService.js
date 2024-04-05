@@ -1,23 +1,25 @@
 import axios from "axios";
 
-const GIT_API_BASE_URL = 'https://api.github.com/users/swavyast/repos';
+const GIT_API_URL = 'https://api.github.com/repos';
+const GIT_API_REPO_URL = 'https://api.github.com/users/${username}/repos';
+const GIT_API_FULL_URL = 'https://api.github.com/users/swavyast/repos';
 
 class GitHubService {
     constructor () {
         this.state = {};
     }
-    getUserDetails () {
-        return axios.get( GIT_API_BASE_URL )
+    getUserDetails ( username ) {
+        return axios.get( `${GIT_API_URL}/${ username }` )
             .then( ( res ) => res.data )
             .catch( ( error ) => { throw error; } );
     }
     getRepositories () {
-        return axios.get( GIT_API_BASE_URL )
+        return axios.get( GIT_API_FULL_URL )
             .then( ( res ) => res.data )
             .catch( ( error ) => { throw error; } );
     }
-    getRepositoryByName (name) {
-        return axios.get( '{GIT_API_BASE_URL}/${name}' )
+    getRepositoryByName ( username, name ) {
+        return axios.get(`${GIT_API_URL}/${username}/${name}`)
             .then( ( res ) => res.data )
             .catch( ( error ) => { throw error; } );
     }

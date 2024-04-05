@@ -22,7 +22,7 @@ function App () {
           <Route path='/users/:username' element={<UserDetailsComponent />} />
           <Route path='/admin' element={<AdminPanelComponent />} />
           <Route path='/github' element={<RepositoryComponent />} />
-          <Route path='/repo/:id' element={<RepositoryDetailsComponent />} />
+          <Route path='/repos/:username/:name' element={<RepositoryDetailsComponent />} />
         </Routes>
         <FooterComponent />
       </Router>
