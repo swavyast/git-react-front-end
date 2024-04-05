@@ -7,6 +7,7 @@ import HeaderComponent from './components/HeaderComponent';
 import FooterComponent from './components/FooterComponent';
 import AdminPanelComponent from './components/AdminPanelComponent';
 import RepositoryComponent from './components/RepositoryComponent';
+import RepositoryDetailsComponent from './components/RepositoryDetailsComponent';
 
 
 function App () {
@@ -20,7 +21,8 @@ function App () {
           <Route path='/login' element={<LoginPageComponent />} />
           <Route path='/users/:username' element={<UserDetailsComponent />} />
           <Route path='/admin' element={<AdminPanelComponent />} />
-          <Route path='/repos' element={<RepositoryComponent />} />
+          <Route path='/github' element={<RepositoryComponent />} />
+          <Route path='/repos/:username/:name' element={<RepositoryDetailsComponent />} />
         </Routes>
         <FooterComponent />
       </Router>

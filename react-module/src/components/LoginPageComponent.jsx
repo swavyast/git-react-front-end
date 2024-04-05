@@ -41,11 +41,11 @@ class LoginPageComponent extends React.Component {
 
                                         <div className="form-floating">
                                             <input type="text" className="form-control" id="floatingInput" placeholder="name@example.com" onChange={this.handleChange} />
-                                            <label for="floatingInput">Email address</label>
+                                            <label forName="floatingInput">Email address</label>
                                         </div>
                                         <div className="form-floating mt-2">
                                             <input type="password" className="form-control" id="floatingPassword" placeholder="Password" onChange={this.handleChange} />
-                                            <label for="floatingPassword">Password</label>
+                                            <label forName="floatingPassword">Password</label>
                                         </div>
 
                                         <div className="checkbox mb-3 mt-2">
