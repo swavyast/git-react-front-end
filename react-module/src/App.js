@@ -8,6 +8,7 @@ import FooterComponent from './components/FooterComponent';
 import AdminPanelComponent from './components/AdminPanelComponent';
 import RepositoryComponent from './components/RepositoryComponent';
 import RepositoryDetailsComponent from './components/RepositoryDetailsComponent';
+import FeatureTestComponent from './components/FeatureTestComponent';
 
 
 function App () {
@@ -17,6 +18,7 @@ function App () {
         <HeaderComponent />
         <Routes>
           <Route path='/' element={<HomePageComponent />} />
+          <Route path='/test' element={<FeatureTestComponent />} />
           <Route path='/register' element={<RegistrationPageComponent />} />
           <Route path='/login' element={<LoginPageComponent />} />
           <Route path='/users/:username' element={<UserDetailsComponent />} />
