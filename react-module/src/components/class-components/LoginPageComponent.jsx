@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from 'react-router-dom';
-import UserService from '../services/UserService';
+import UserService from '../../services/UserService';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
 function NavigatorHook () {
@@ -24,15 +24,19 @@ class LoginPageComponent extends React.Component {
     handleLogin () {
         const { username, password } = this.state;
         const user = { username, password };
-        UserService.loginUser( user );
+        UserService.loginUser( user ).then( ( x ) => {
+            if ( x ) {
+                this.props.setIsAuthenticated( true );
+            }
+        } ).catch( error => console.log( error ) );
     }
 
     render () {
         return (
-            <div>
+            <div className='mt-5'>
                 <div className="container-fluid p-0">
                     <div className="col-md-6 offset-3">
-                    <div className="text-center" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '75vh', width: '35em', marginLeft:'18px' }}>
+                        <div className="text-center" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '75vh', width: '35em', marginLeft: '18px' }}>
                             <div className="card shadow-lg col-md-8 offset-2 px-5 pt-3">
                                 <main className="form-signin">
                                     <form>
@@ -41,11 +45,11 @@ class LoginPageComponent extends React.Component {
 
                                         <div className="form-floating">
                                             <input type="text" className="form-control" id="floatingInput" placeholder="name@example.com" onChange={this.handleChange} />
-                                            <label forName="floatingInput">Email address</label>
+                                            <label htmlFor='floatingInput'>Email address</label>
                                         </div>
                                         <div className="form-floating mt-2">
                                             <input type="password" className="form-control" id="floatingPassword" placeholder="Password" onChange={this.handleChange} />
-                                            <label forName="floatingPassword">Password</label>
+                                            <label htmlFor="floatingPassword">Password</label>
                                         </div>
 
                                         <div className="checkbox mb-3 mt-2">
@@ -69,6 +73,10 @@ class LoginPageComponent extends React.Component {
     }
 }
 
-LoginPageComponent.propTypes = {};
+LoginPageComponent.propTypes = {
+    navigate: PropTypes.func,
+    isAuthenticated: PropTypes.bool,
+    setIsAuthenticated: PropTypes.func
+};
 
 export default NavigatorHook;

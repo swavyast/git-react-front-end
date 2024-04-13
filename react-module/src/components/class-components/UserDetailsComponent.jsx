@@ -2,7 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
-import UserService from '../services/UserService';
+import UserService from '../../services/UserService';
 
 class UserDetailsComponent extends React.Component {
     constructor ( props ) {

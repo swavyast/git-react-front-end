@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useParams, useNavigate } from 'react-router-dom';
 import RepositoryComponent from './RepositoryComponent';
-import GitHubService from '../services/GitHubService';
+import GitHubService from '../../services/GitHubService';
 
 function NavigatorHook(){
     const navigate = useNavigate();

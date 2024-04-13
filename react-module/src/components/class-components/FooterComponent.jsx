@@ -18,7 +18,7 @@ class FooterComponent extends React.Component {
 
     render () {
         return (
-            <div>
+            <div className='mt-5 fixed-bottom'>
                 <p className="text-center text-muted">&copy;marketListing</p>
             </div>
         );

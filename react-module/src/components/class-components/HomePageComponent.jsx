@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import RegistrationPageComponent from './RegistrationPageComponent';
-import UserDetailsComponent from './UserDetailsComponent';
+import { Link,useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import UserService from '../services/UserService';
