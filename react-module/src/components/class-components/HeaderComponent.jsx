@@ -4,48 +4,23 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faHome, faAddressBook, faHandsHelping, faDownload, faInfoCircle, faPowerOff } from '../../index';
 import ToggleButton from '../../assets/ToggleButton';
-import MyPopup from '../../assets/MyPopup';
-
-function NavigatorHook () {
-    const navigate = useNavigate();
-    const [ isAuthenticated, setIsAuthenticated ] = useState( false );
-    const [ dropdownStatus, setDropdownStatus ] = useState( false );
-    const [popup, setPopup] = useState(false);
-    // console.log(this.props.navigate);
-
-    return <div>
-        <HeaderComponent
-            navigate={navigate}
-            isAuthenticated={isAuthenticated}
-            setIsAuthenticated={setIsAuthenticated}
-            dropdownStatus={dropdownStatus}
-            setDropdownStatus={setDropdownStatus}
-            popup = {popup}
-            setPopup = {setPopup}
-        />
-    </div>;
-}
+import Alert from 'react-bootstrap/Alert';
+import Badge from 'react-bootstrap/Badge';
 
 class HeaderComponent extends React.Component {
     constructor ( props ) {
         super( props );
-        this.state = {};
-        this.popupCall = this.popupCall.bind(this);
-    }
-
-    popupCall(){
-        const {popup, setPopup} = this.props;
-        this.props.setPopup(!popup);
-        return <MyPopup popup={popup} setPopup={setPopup} />
+        this.state = {
+            showAlertStatus: false
+        };
     }
 
     componentDidMount () {
-        this.props.setDropdownStatus( false );
+
     }
 
     render () {
         const { isAuthenticated, setIsAuthenticated } = this.props;
-        setIsAuthenticated( false );
         const { dropdownStatus, setDropdownStatus } = this.props;
         return (
             <div className='p-0 m-0 bg-black position-fixed-top'>
@@ -67,22 +42,42 @@ class HeaderComponent extends React.Component {
                             </ul>
                             <div className="mx-auto px-5"></div>
                             <div className="mx-auto px-5">
-                                <h3 className='text-center mb-0 text-white' style={{ marginTop: '14px' }}><Link to='/' className='nav-link pe-auto fs-5'><FontAwesomeIcon icon={faHome} /></Link></h3>
+                                <h3 className='text-center mb-0 text-white' style={{ marginTop: '14px' }}><Link to='/' className='nav-link pe-auto fs-5'><FontAwesomeIcon icon={faHome} /><Badge className='bg-dark d-block' style={{ fontSize: '10px' }}>Home</Badge></Link></h3>
                             </div>
                             <ul className='d-block bg-dark p-0' style={{ marginTop: '10px' }}>
                                 {isAuthenticated ? (
                                     <li className='d-inline my-auto py-auto'><Link className='btn btn-sm btn-dark text-light text-decoration-none fs-6' to={'/logout'}><FontAwesomeIcon icon={faPowerOff} style={{ maxHeight: '12px', paddingBottom: '2px' }} /> Logout</Link></li>
                                 ) : (
-                                    <li className='d-inline my-auto py-auto'><Link className='btn btn-sm btn-dark text-light text-decoration-none fs-6' to={'/login'} onClick={this.popupCall} ><FontAwesomeIcon icon={faPowerOff} style={{ maxHeight: '12px', paddingBottom: '2px' }} /> Login</Link></li>
+                                    <li className='d-inline my-auto py-auto'><Link className='btn btn-sm btn-dark text-light text-decoration-none fs-6' to={'/login'} onMouseOver={() => {
+                                        this.setState( { showAlertStatus: true } ); setTimeout( () => {
+                                            this.setState( { showAlertStatus: false } );
+                                        }, 3000 );
+                                    }} ><FontAwesomeIcon icon={faPowerOff} style={{ maxHeight: '12px', paddingBottom: '2px' }} /> Login</Link></li>
                                 )}
                             </ul>
                         </div>
                     </div>
                 </nav>
-
+                <div>
+                    {this.state.showAlertStatus ? (
+                        <Alert variant="success">
+                            <Alert.Heading>Hey, nice to see you</Alert.Heading>
+                            <p>
+                                Aww yeah, you successfully read this important alert message. This
+                                example text is going to run a bit longer so that you can see how
+                                spacing within an alert works with this kind of content.
+                            </p>
+                            <hr />
+                            <p className="mb-0">
+                                Whenever you need to, be sure to use margin utilities to keep things
+                                nice and tidy.
+                            </p>
+                        </Alert>
+                    ) : null}
+                </div>
                 {dropdownStatus ? (
-                    <div className='pt-0 bg-dark' style={{ marginTop: '-15px', opacity: '1' }}>
-                        <div className="d-flex">
+                    <div className='pt-0 bg-dark' style={{ marginTop: '-15px', zIndex: '1000' }}>
+                        <div className="d-flex bg-dark">
                             <ul className='d-block bg-dark' style={{ marginLeft: '14px', maxWidth: '90%', minHeight: '2rem' }}>
                                 <li className='p-2 my-auto py-auto'><Link className='btn btn-sm btn-dark text-light text-decoration-none' to={'/'}><FontAwesomeIcon icon={faHome} style={{ maxHeight: '12px', paddingBottom: '2px' }} /> Home</Link></li>
                                 <li className='p-2 my-auto py-auto'><Link className='btn btn-sm btn-dark text-light text-decoration-none' to={'/About'}><FontAwesomeIcon icon={faInfoCircle} style={{ maxHeight: '12px', paddingBottom: '2px' }} /> About</Link></li>
@@ -150,13 +145,13 @@ class HeaderComponent extends React.Component {
 }
 
 HeaderComponent.propTypes = {
-    navigate : PropTypes.func,
-    isAuthenticated : PropTypes.bool,
-    setIsAuthenticated : PropTypes.func,
-    dropdownStatus : PropTypes.bool,
-    setDropdownStatus : PropTypes.func,
-    popup : PropTypes.bool,
-    setPopup : PropTypes.func
+    navigate: PropTypes.func,
+    isAuthenticated: PropTypes.bool,
+    setIsAuthenticated: PropTypes.func,
+    dropdownStatus: PropTypes.bool,
+    setDropdownStatus: PropTypes.func,
+    popup: PropTypes.bool,
+    setPopup: PropTypes.func
 };
 
-export default NavigatorHook;
+export default HeaderComponent;

@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 // import HomePageComponent from './components/HomePageComponent';
 import RegistrationPageComponent from './components/class-components/RegistrationPageComponent';
@@ -13,12 +14,13 @@ import NewHome from './components/functional-components/NewHome';
 
 
 function App () {
+  const [ dropdownStatus, setDropdownStatus ] = useState( false );
   return (
     <div className="container-fluid p-0">
       <Router>
-        <HeaderComponent />
+        <HeaderComponent dropdownStatus={dropdownStatus} setDropdownStatus={setDropdownStatus} />
         <Routes>
-          <Route path='/' element={<NewHome />} />
+          <Route path='/' element={<NewHome dropdownStatus={dropdownStatus} setDropdownStatus={setDropdownStatus} />} />
           <Route path='/test' element={<FeatureTestComponent />} />
           <Route path='/register' element={<RegistrationPageComponent />} />
           <Route path='/login' element={<LoginPageComponent />} />

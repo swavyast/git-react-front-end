@@ -3,10 +3,11 @@ div{
     padding: 0;
     margin: 0;
     overflow: hidden;
-    box-sizing: content-box;
+    box-sizing: border-box;
 }
 
-.newhome{
+html, body {
+    /* background-color: black; */
     background-image: url('../images/gitactivitychartclone.png');
     background-repeat: no-repeat;
     background-clip: content-box;
@@ -14,5 +15,5 @@ div{
     background-position-x: center;
     background-position-y: top;
     background-attachment: fixed;
-    overflow-y: scroll;
+    z-index: -1;
 }
