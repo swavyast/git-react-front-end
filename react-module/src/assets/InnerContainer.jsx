@@ -1,7 +1,21 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
-function InnerContainer() {
-  return <div style={{margin:'15px', padding:'15px', boxSizing:'border-box', boxShadow:'5px'}}></div>;
+function InnerContainer( { className, style, children } ) {
+  const defaultStyle = {
+    padding: '2px',
+    margin: '2px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  };
+  const aggregateStyle = { ...defaultStyle, ...style };
+  return <div className={className} style={aggregateStyle}>{children}</div>
 }
 
+InnerContainer.propTypes = {
+  className: PropTypes.string,
+  style: PropTypes.object,
+  children: PropTypes.node
+};
 export default InnerContainer

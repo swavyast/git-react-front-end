@@ -1,13 +1,11 @@
-
-div{
+div {
     padding: 0;
     margin: 0;
     overflow: hidden;
     box-sizing: border-box;
 }
 
-html, body {
-    /* background-color: black; */
+.defaultbg {
     background-image: url('../images/gitactivitychartclone.png');
     background-repeat: no-repeat;
     background-clip: content-box;
@@ -15,5 +13,17 @@ html, body {
     background-position-x: center;
     background-position-y: top;
     background-attachment: fixed;
-    z-index: -1;
+    z-index: 999;
+}
+
+.errors {
+    width: 100%;
+    background-image: url('../images/rgbhexagonfooterbg.png');
+    background-repeat: repeat;
+    background-clip: border-box;
+    background-size: contain;
+    background-position-x: center;
+    background-position-y: top;
+    background-attachment: fixed;
+    z-index: 999;
 }

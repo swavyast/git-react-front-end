@@ -1,13 +1,7 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import GitHubService from '../../services/GitHubService';
-
-function NavigatorHook(){
-    const navigate = useNavigate();
-
-    return <RepositoryComponent navigate = {navigate} />
-}
+import ErrorBoundary from './ErrorBoundary';
 
 class RepositoryComponent extends React.Component {
     constructor ( props ) {
@@ -21,8 +15,8 @@ class RepositoryComponent extends React.Component {
 
     selectRepo(username, name){
         console.log('Selected repository name:', username, name);
-        const {navigate} = this.props;
-        navigate(`/repos/${username}/${name}`);
+        const {setNavigate} = this.props;
+        setNavigate(`/repos/${username}/${name}`);
     }
 
     createCard ( id, name, url, desc, gitUrl, sshUrl,
@@ -71,7 +65,7 @@ class RepositoryComponent extends React.Component {
 
     render () {
         const { repos } = this.state;
-        return (
+        return <ErrorBoundary>
             <div>
                 {repos.map( repo => (
                     this.createCard(
@@ -89,10 +83,10 @@ class RepositoryComponent extends React.Component {
                     )
                 ) )}
             </div>
-        );
+        </ErrorBoundary>
     }
 }
 
 RepositoryComponent.propTypes = {};
 
-export default NavigatorHook;
+export default RepositoryComponent;

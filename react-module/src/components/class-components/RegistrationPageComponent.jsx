@@ -1,17 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import ErrorBoundary from './ErrorBoundary';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome } from '@fortawesome/free-solid-svg-icons';
-import { useNavigate } from 'react-router-dom';
 import UserService from '../../services/UserService';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
-
-function NavigatorHook () {
-    const navigate = useNavigate();
-    const [ isAuthenticated, setIsAuthenticated ] = useState( false );
-
-    return <RegistrationPageComponent navigate={navigate} isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />;
-}
 
 class RegistrationPageComponent extends React.Component {
     constructor ( props ) {
@@ -31,16 +23,17 @@ class RegistrationPageComponent extends React.Component {
     }
     submitHandler ( event ) {
         event.preventDefault();
+        const { setNavigate } = this.props;
         const { name, username, email, password } = this.state;
         const user = { name, username, email, password };
         console.log( JSON.stringify( user ) );
         UserService.registerUser( user ).then( ( res ) => {
-            this.props.navigate( '/users/' + username );
+            setNavigate( '/users/' + username );
             return user;
         } );
     }
     render () {
-        return (
+        return <ErrorBoundary>
             <div>
                 <div className='container p-5'>
                     <div className='card shadow-lg p-5'>
@@ -79,7 +72,7 @@ class RegistrationPageComponent extends React.Component {
                                             </div>
                                         </div>
                                         <div className='row form-group'>
-                                        <button className="w-50 btn btn-lg btn-dark mt-5 mx-auto" type="submit">Register</button>
+                                            <button className="w-50 btn btn-lg btn-dark mt-5 mx-auto" type="submit">Register</button>
                                         </div>
                                     </div>
                                 </div>
@@ -88,10 +81,10 @@ class RegistrationPageComponent extends React.Component {
                     </div>
                 </div>
             </div>
-        );
+        </ErrorBoundary>;
     }
 }
 
 RegistrationPageComponent.propTypes = {};
 
-export default NavigatorHook;
+export default RegistrationPageComponent;

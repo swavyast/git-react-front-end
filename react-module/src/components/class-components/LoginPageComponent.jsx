@@ -1,16 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useNavigate } from 'react-router-dom';
 import UserService from '../../services/UserService';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
-
-function NavigatorHook () {
-    const navigate = useNavigate();
-    const [ isAuthenticated, setIsAuthenticated ] = useState( false );
-
-    return <LoginPageComponent navigate={navigate} isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />;
-}
+import ErrorBoundary from './ErrorBoundary';
 
 class LoginPageComponent extends React.Component {
     constructor ( props ) {
@@ -32,7 +25,7 @@ class LoginPageComponent extends React.Component {
     }
 
     render () {
-        return (
+        return <ErrorBoundary>
             <div className='mt-5'>
                 <div className="container-fluid p-0">
                     <div className="col-md-6 offset-3">
@@ -69,14 +62,12 @@ class LoginPageComponent extends React.Component {
                     </div>
                 </div>
             </div>
-        );
+        </ErrorBoundary>;
     }
 }
 
 LoginPageComponent.propTypes = {
-    navigate: PropTypes.func,
-    isAuthenticated: PropTypes.bool,
     setIsAuthenticated: PropTypes.func
 };
 
-export default NavigatorHook;
+export default LoginPageComponent;

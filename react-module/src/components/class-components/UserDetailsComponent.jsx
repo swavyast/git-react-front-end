@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import UserService from '../../services/UserService';
+import ErrorBoundary from './ErrorBoundary';
 
 class UserDetailsComponent extends React.Component {
     constructor ( props ) {
@@ -12,7 +13,7 @@ class UserDetailsComponent extends React.Component {
             username: props.username,
             email: props.email,
             password: props.password,
-            repos:[]
+            repos: []
         };
         this.fetchUserData = this.fetchUserData.bind( this );
         // this.createCard = this.createCard.bind( this );
@@ -40,7 +41,7 @@ class UserDetailsComponent extends React.Component {
 
     render () {
         const username = this.props.username;
-        return (
+        return <ErrorBoundary>
             <div>
                 <div className='container p-5'>
                     <div className='card shadow-lg p-5'>
@@ -134,7 +135,7 @@ class UserDetailsComponent extends React.Component {
                     {/* {cardArray} */}
                 </div>
             </div>
-        );
+        </ErrorBoundary>;
     }
 }
 

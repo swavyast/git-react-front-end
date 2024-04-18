@@ -1,15 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import RepositoryComponent from './RepositoryComponent';
 import GitHubService from '../../services/GitHubService';
-
-function NavigatorHook(){
-    const navigate = useNavigate();
-    const {username, name} = useParams();
-
-    return <RepositoryDetailsComponent navigate = {navigate} username = {username} name = {name} />
-}
+import ErrorBoundary from './ErrorBoundary';
 
 class RepositoryDetailsComponent extends React.Component {
     constructor(props) {
@@ -88,8 +82,8 @@ class RepositoryDetailsComponent extends React.Component {
     render() {
         const { repo } = this.state;
         console.log("repo in RepositoryDetailsComponent render method : "+repo.id);
-        return (
-            <div>
+        return <ErrorBoundary>
+                        <div>
               {
                 this.createCard(
                     repo.id,
@@ -106,10 +100,10 @@ class RepositoryDetailsComponent extends React.Component {
                 )
               }
             </div>
-        );
+        </ErrorBoundary>
     }
 }
 
 RepositoryDetailsComponent.propTypes = {};
 
-export default NavigatorHook;
+export default RepositoryDetailsComponent;

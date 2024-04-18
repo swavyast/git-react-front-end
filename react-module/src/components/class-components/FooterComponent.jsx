@@ -1,14 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useNavigate } from 'react-router-dom';
-
-function NavigatorHook () {
-    const navigate = useNavigate();
-    const [ isAuthenticated, setIsAuthenticated ] = useState( false );
-    // console.log(this.props.navigate);
-
-    return <FooterComponent navigate={navigate} isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />;
-}
+import ErrorBoundary from './ErrorBoundary';
 
 class FooterComponent extends React.Component {
     constructor ( props ) {
@@ -17,14 +9,14 @@ class FooterComponent extends React.Component {
     }
 
     render () {
-        return (
+        return <ErrorBoundary>
             <div className='mt-5 fixed-bottom'>
                 <p className="text-center text-muted">&copy;marketListing</p>
             </div>
-        );
+        </ErrorBoundary>;
     }
 }
 
 FooterComponent.propTypes = {};
 
-export default NavigatorHook;
+export default FooterComponent;

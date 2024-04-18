@@ -1,17 +1,12 @@
-import React, { useState } from 'react';
-import { Link,useNavigate } from 'react-router-dom';
+import React from 'react';
+import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
-import UserService from '../services/UserService';
-import ToggleTesting from '../js/ToggleTesting';
+import UserService from '../../services/UserService';
+import ToggleTesting from '../../js/ToggleTesting';
 import FeatureTestComponent from './FeatureTestComponent';
-
-function NavigatorHook () {
-    const navigate = useNavigate();
-    const [ isAuthenticated, setIsAuthenticated ] = useState( false );
-
-    return <HomePageComponent navigate={navigate} isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />;
-}
+import ErrorBoundary from './ErrorBoundary';
 
 class HomePageComponent extends React.Component {
     constructor ( props ) {
@@ -41,21 +36,22 @@ class HomePageComponent extends React.Component {
 
     logoutUser ( event ) {
         const { name } = event.target;
+        const {setNavigate} = this.props;
         this.setState( { [ name ]: null } );
         this.setIsAuthenticated( false );
-        this.navigate( '../' );
+        setNavigate( '../' );
     }
 
     render () {
-        const { isAuthenticated } = this.props;
+        const { isAuthenticated, setIsAuthenticated } = this.props;
         const { username, password } = this.props;
         const user = UserService.getUserByUsername( username );
-        return (
-            <div>
+        return <ErrorBoundary>
+                       <div>
                 {/* {isAuthenticated ? (
                     <UserDetailsComponent onLogout={this.handleLogout} />
                 ) : (
-                    <RegistrationPageComponent onLogin={this.handleLogin} navigate={this.props.navigate} />
+                    <RegistrationPageComponent onLogin={this.handleLogin} />
                 )} */}
                 <div className="container-fluid p-0">
                     <ToggleTesting />
@@ -94,10 +90,12 @@ class HomePageComponent extends React.Component {
                     </div>
                 </div>
             </div>
-        );
+        </ErrorBoundary>
     }
 }
 
-HomePageComponent.propTypes = {};
+HomePageComponent.propTypes = {
+    setNavigate : PropTypes.func
+};
 
-export default NavigatorHook;
+export default HomePageComponent;
