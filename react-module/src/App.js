@@ -12,30 +12,32 @@ import RepositoryDetailsComponent from './components/class-components/Repository
 import FeatureTestComponent from './components/class-components/FeatureTestComponent';
 import NewHome from './components/functional-components/NewHome';
 import ErrorBoundary from './components/class-components/ErrorBoundary';
+import { AuthProvider } from './components/class-components/context/AuthContext';
 
 
 function App () {
   const [ dropdownStatus, setDropdownStatus ] = useState( false );
-  const [ isAuthenticated, setIsAuthenticated ] = useState( false );
   return (
     <ErrorBoundary>
-      <div className="container-fluid p-0">
-        <Router>
-          <HeaderComponent dropdownStatus={dropdownStatus} setDropdownStatus={setDropdownStatus} />
-          <Routes>
-            <Route path='/' element={<NewHome dropdownStatus={dropdownStatus} setDropdownStatus={setDropdownStatus} />} />
-            {/* <Route path='/' element={<HomePageComponent dropdownStatus={dropdownStatus} setDropdownStatus={setDropdownStatus} />} /> */}
-            <Route path='/test' element={<FeatureTestComponent />} />
-            <Route path='/register' element={<RegistrationPageComponent isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />} />
-            <Route path='/login' element={<LoginPageComponent isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />} />
-            <Route path='/users/:username' element={<UserDetailsComponent isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />} />
-            <Route path='/admin' element={<AdminPanelComponent isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />} />
-            <Route path='/github' element={<RepositoryComponent isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />} />
-            <Route path='/repos/:username/:name' element={<RepositoryDetailsComponent />} />
-          </Routes>
-          <FooterComponent />
-        </Router>
-      </div>
+      <AuthProvider>
+        <div className="container-fluid p-0 z-index-0">
+          <Router>
+            <HeaderComponent dropdownStatus={dropdownStatus} setDropdownStatus={setDropdownStatus} />
+            <Routes>
+              <Route path='/' element={<NewHome dropdownStatus={dropdownStatus} setDropdownStatus={setDropdownStatus} />} />
+              {/* <Route path='/' element={<HomePageComponent dropdownStatus={dropdownStatus} setDropdownStatus={setDropdownStatus} />} /> */}
+              <Route path='/test' element={<FeatureTestComponent />} />
+              <Route path='/register' element={<RegistrationPageComponent  />} />
+              <Route path='/login' element={<LoginPageComponent  />} />
+              <Route path='/users/:username' element={<UserDetailsComponent  />} />
+              <Route path='/admin' element={<AdminPanelComponent  />} />
+              <Route path='/github' element={<RepositoryComponent  />} />
+              <Route path='/repos/:username/:name' element={<RepositoryDetailsComponent />} />
+            </Routes>
+            <FooterComponent />
+          </Router>
+        </div>
+      </AuthProvider>
     </ErrorBoundary>
   );
 }

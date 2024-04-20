@@ -1,8 +1,8 @@
 import axios from "axios";
+import { AuthContext } from "../components/class-components/context/AuthContext";
 
-const GIT_API_URL = 'https://api.github.com/repos';
-const GIT_API_REPO_URL = 'https://api.github.com/users/${username}/repos';
-const GIT_API_FULL_URL = 'https://api.github.com/users/swavyast/repos';
+const GIT_API_URL = 'https://api.github.com/users';
+const GIT_BASE_URL = 'https://github.com'
 
 class GitHubService {
     constructor () {
@@ -13,13 +13,13 @@ class GitHubService {
             .then( ( res ) => res.data )
             .catch( ( error ) => { throw error; } );
     }
-    getRepositories () {
-        return axios.get( GIT_API_FULL_URL )
+    getRepositories (username) {
+        return axios.get( `${GIT_API_URL}/${ username }/repos` )
             .then( ( res ) => res.data )
             .catch( ( error ) => { throw error; } );
     }
     getRepositoryByName ( username, name ) {
-        return axios.get(`${GIT_API_URL}/${username}/${name}`)
+        return axios.get(`${GIT_BASE_URL}/${username}/${name}`)
             .then( ( res ) => res.data )
             .catch( ( error ) => { throw error; } );
     }
