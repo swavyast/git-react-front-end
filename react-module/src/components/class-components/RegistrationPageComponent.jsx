@@ -1,11 +1,10 @@
 import React from 'react';
-import { Navigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import {createBrowserHistory} from 'history';
 import { AuthContext, TokenContext, MessageContext, UserContext } from './context/AuthContext';
 import ErrorBoundary from './ErrorBoundary';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon, faGithub } from '../../index';
 import UserService from '../../services/UserService';
-import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
 class RegistrationPageComponent extends React.Component {
     constructor ( props ) {
@@ -24,9 +23,11 @@ class RegistrationPageComponent extends React.Component {
         };
         this.submitHandler = this.submitHandler.bind( this );
         this.handleChange = this.handleChange.bind( this );
+        this.history = createBrowserHistory();
     }
 
     componentDidMount () {
+        this.history.push('/register');
         this.setState( {
             isAuthenticated: this.context.isAuthenticated,
             authToken: this.context.authToken,
@@ -45,10 +46,13 @@ class RegistrationPageComponent extends React.Component {
         const user = { fname, lname, username, email, password, accesstoken };
         console.log( JSON.stringify( user ) );
         const userService = new UserService(authContext, tokenContext, messageContext, userContext);
+        if(authContext.isAuthenticated){
+            userService.logoutUser();
+        }
         userService.registerUser( user )
         .then( res => {
-            console.log(res);
-            Navigate.to( '/users/' + username );
+            console.log('[ logging response in submitHandler : '+res+' ]');
+            this.history.push( `/users/${username} `);
             return user;
         } )
         .catch(error => console.log(error))

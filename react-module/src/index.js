@@ -5,6 +5,7 @@ import './css/style.css'
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faGithub, faInstagram, faTwitter, faTelegram, faGoogle, faYahoo, faYoutube } from "@fortawesome/free-brands-svg-icons";
 import { faHome, faPowerOff, faUserCheck, faUserPlus, faDownload, faInfoCircle, faAddressBook, faAddressCard, faUser, faSearch, faLocation, faLock, faLockOpen, faNoteSticky, faReceipt, faPhone, faHandsHelping } from "@fortawesome/free-solid-svg-icons";
 
@@ -16,6 +17,7 @@ root.render(
 );
 
 export {
+  FontAwesomeIcon,
   faFacebook,
   faGithub,
   faInstagram,
